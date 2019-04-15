@@ -19,9 +19,11 @@ def maybe_install_pkgs(*pkgs):
 
     pip_install_cmd = ('pip', 'install') + tuple(*pkgs)
     print(u'🛈 Running {0!s}...'.format(pip_install_cmd), file=sys.stderr)
-    rc = subprocess.call(pip_install_cmd)
 
-    if rc:
-        print(u'😉 Installation failed, ignoring...', file=sys.stderr)
+
+    try:
+        subprocess.call(pip_install_cmd)
+    except subprocess.CalledProcessError:
+        print(u'😔 Installation failed, ignoring...', file=sys.stderr)
     else:
         print(u'😄 Installation succeeded...', file=sys.stderr)
