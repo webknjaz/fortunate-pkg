@@ -17,13 +17,14 @@ def maybe_install_pkgs(*pkgs):
         print(u'😉 Nothing to install, skipping...', file=sys.stderr)
         return
 
+    print(u'😄 Installing {0!s}...'.format(', '.join(pkgs)), file=sys.stderr)
+
     pip_install_cmd = (
         'pip', 'install', '--ignore-installed',
         '--no-warn-script-location',
     ) + tuple(pkgs)
+
     print(u'🛈 Running {0!s}...'.format(pip_install_cmd), file=sys.stderr)
-
-
     try:
         subprocess.call(pip_install_cmd)
     except subprocess.CalledProcessError:
