@@ -25,7 +25,7 @@ def maybe_install_pkgs(*pkgs, where=None):
 
     pip_install_cmd = (
         'pip', 'install', '--ignore-installed',
-        '--no-warn-script-location',
+        '--no-warn-script-location', '-v',
     ) + pip_install_prefix + tuple(pkgs)
 
     print(u'🛈 Running {0!s}...'.format(pip_install_cmd), file=sys.stderr)
