@@ -2,6 +2,7 @@
 import functools
 import os
 import pathlib
+import platform
 
 from setuptools.build_meta import (
     build_sdist,
@@ -43,9 +44,11 @@ def get_build_env_location():
     2) Grabbing the value of the ``PYTHONPATH`` environment variable
     """
     overlay_venv_path = (
-        pathlib.Path(__file__) / '..' / '..' / '..' / '..' / '..'
-    ).resolve()
-    return overlay_venv_path
+        pathlib.Path(__file__) / '..' / '..' / '..' / '..'
+    )
+    if platform.system() != 'Windows':
+        overlay_venv_path = overlay_venv_path / '..'
+    return overlay_venv_path.resolve()
 
 
 def try_having_optional_build_deps(f):
