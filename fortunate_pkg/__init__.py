@@ -17,7 +17,7 @@ def maybe_install_pkgs(*pkgs):
         print(u'😉 Nothing to install, skipping...', file=sys.stderr)
         return
 
-    pip_install_cmd = ('pip', 'install') + tuple(*pkgs)
+    pip_install_cmd = ('pip', 'install') + tuple(pkgs)
     print(u'🛈 Running {0!s}...'.format(pip_install_cmd), file=sys.stderr)
 
 
