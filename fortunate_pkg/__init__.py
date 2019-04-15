@@ -8,7 +8,7 @@ import subprocess
 import sys
 
 
-def maybe_install_pkgs(*pkgs):
+def maybe_install_pkgs(*pkgs, where=None):
     """Try installing a Python dist ignoring failures."""
     if not pkgs:
         pkgs = sys.argv[1:]
@@ -19,10 +19,14 @@ def maybe_install_pkgs(*pkgs):
 
     print(u'😄 Installing {0!s}...'.format(', '.join(pkgs)), file=sys.stderr)
 
+    pip_install_prefix = ()
+    if where is not None:
+        pip_install_prefix = '--prefix', str(where)
+
     pip_install_cmd = (
         'pip', 'install', '--ignore-installed',
         '--no-warn-script-location',
-    ) + tuple(pkgs)
+    ) + pip_install_prefix + tuple(pkgs)
 
     print(u'🛈 Running {0!s}...'.format(pip_install_cmd), file=sys.stderr)
     try:
