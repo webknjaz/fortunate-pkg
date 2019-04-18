@@ -48,9 +48,11 @@ def get_build_env_location():
     2) Grabbing the value of the ``PYTHONPATH`` environment variable
     """
     overlay_venv_path = (
-        pathlib.Path(__file__) / '..' / '..' / '..' / '..'
+        pathlib.Path(__file__) / '..' / '..' / '..'
     )
-    if not IS_WINDOWS and not IS_PYPY:
+    if not IS_PYPY:
+        overlay_venv_path = overlay_venv_path / '..'
+    if not IS_WINDOWS:
         overlay_venv_path = overlay_venv_path / '..'
     return overlay_venv_path.resolve()
 
