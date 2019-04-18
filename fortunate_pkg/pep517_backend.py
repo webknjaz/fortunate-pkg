@@ -52,8 +52,8 @@ def get_build_env_location():
     )
     if not IS_PYPY:
         overlay_venv_path = overlay_venv_path / '..'
-    if not IS_WINDOWS:
-        overlay_venv_path = overlay_venv_path / '..'
+        if not IS_WINDOWS:
+            overlay_venv_path = overlay_venv_path / '..'
     return overlay_venv_path.resolve()
 
 
