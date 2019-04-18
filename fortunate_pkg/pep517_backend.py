@@ -16,6 +16,10 @@ import toml
 from . import maybe_install_pkgs
 
 
+IS_WINDOWS = platform.system() == 'Windows'
+IS_PYPY = platform.python_implementation() == 'PyPy'
+
+
 def get_optional_build_deps():
     """Grab optional build dependencies from pyproject.toml config.
 
@@ -46,7 +50,7 @@ def get_build_env_location():
     overlay_venv_path = (
         pathlib.Path(__file__) / '..' / '..' / '..' / '..'
     )
-    if platform.system() != 'Windows':
+    if not IS_WINDOWS and not IS_PYPY:
         overlay_venv_path = overlay_venv_path / '..'
     return overlay_venv_path.resolve()
 
